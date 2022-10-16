@@ -1,0 +1,275 @@
+echo "# ID-Please" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/joshuasiyoonkim/ID-Please.git
+git push -u origin main
+
+import numpy as np
+import random
+import datetime
+#2 numpy array of first and last names
+#randomly select either
+#eventually check to make sure last names are individual
+#probability counter for
+#array size = 14
+
+print("Welcome to IDs, Please!")
+
+isRunning = True
+count = 0
+
+last_names_array = ["Harold", "Smith", "Johnson", "Carmichael", "McBeans", "Dean Martin", "Brown", "Davis", "Kim", "Nguyen", "Goldberg", "Rosenblum", "Hurts", "Swag"]
+first_names_array = ["Mary", "Brad", "Chad", "Susan", "Caroline", "Patricia", "Brady", "Andrew", "Emma", "Emily", "Travis", "Tyler", "Keith", "Alexis", "Patrick", "EJ"]
+lennyFaces = np.array(["(□ ⍘ □)", "(• A •)", "(° ⍘ °)", "(⪩ V ⪨)", "(⪦ ‿ ⪧)", "(⸌ __ ⸍)",  "(э U э)", "(* U *)" , "(❍ ‿ ❍)" , "(ತ ! ತ)", "(* ⍘ *)", "(> 0 <)", "(꘠ - ꘠)", "(Ȍ ^ Ȍ)"])
+WashU = ["|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", "|  WASHINGTON UNIVERSITY IN ST. LOUIS     |", ]
+
+np.random.shuffle(lennyFaces)
+
+for i in range(len(last_names_array)):
+    # id number list
+    idNumber = np.empty(len(last_names_array))
+
+    for i in range(len(last_names_array)):
+        idNumber[i] = int(499820 + i)
+
+    # date created list
+    dateCreated = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ]
+
+    start_date = datetime.date(2018, 1, 1)
+    end_date = datetime.date(2022, 1, 1)
+
+
+
+    for i in range(len(last_names_array)):
+        time_between_dates = end_date - start_date
+        days_between_dates = time_between_dates.days
+        random_number_of_days = random.randrange(days_between_dates)
+        random_date = start_date + datetime.timedelta(days=random_number_of_days)
+        dateCreated[i] = random_date
+
+    # size of each line is 43 units
+    random_last_name = np.random.choice(last_names_array)
+    random_first_name = np.random.choice(first_names_array)
+    # count number
+    random_last_size = len(random_last_name)
+    random_first_size = len(random_first_name)
+
+    last_name_line_size = 26 - random_last_size
+
+    line_start = "|  "
+    last_name_line_blank = ""
+
+    for i in range(last_name_line_size):
+        last_name_line_blank = last_name_line_blank + " "
+
+    last_name_line_end = " ---------   |"
+    last_name_line = line_start + random_last_name + last_name_line_blank + last_name_line_end
+    first_name_line_size = 26 - random_first_size
+    first_name_line_blank = ""
+
+    charCount = len(lennyFaces[count])  # number of characters in a lenny face
+
+    for i in range(first_name_line_size):
+        first_name_line_blank = first_name_line_blank + " "
+
+        first_name_line_end = "| " + lennyFaces[count] + " |  |"
+
+        first_name_line = line_start + random_first_name + first_name_line_blank + first_name_line_end
+
+#all the data has been gotten
+
+#lets make the fakes
+
+enter = 0
+indexArr = [-1,-1,-1]
+
+
+
+for i in range(3):
+
+
+    enter = random.randint(0, 13)
+
+    yes = True
+
+    while yes:
+
+        if enter not in indexArr:
+            indexArr[i] = enter
+            yes = False
+        else:
+            enter = random.randint(0,13)
+            yes = True
+
+
+
+indexArr.sort()
+print(indexArr)
+
+
+
+
+
+
+while isRunning:
+
+    enter = input("Press Enter")
+
+    print()
+
+
+    #size of each line is 43 units
+    random_last_name = np.random.choice(last_names_array)
+    random_first_name = np.random.choice(first_names_array)
+    #count number
+    random_last_size = len(random_last_name)
+    random_first_size = len(random_first_name)
+    #print(random_last_size)
+    #print (random_first_size)
+    #print (random_last_name)
+    #print (random_first_name)
+    last_name_line_size = 26 - random_last_size
+    #print (last_name_line_size)
+    line_start = "|  "
+    last_name_line_blank =""
+
+
+
+    for i in indexArr:
+        # check = random.randint(1,4)
+        check = 4
+
+        if check == 1:
+            last_names_array[i] = ""  # delete the last name
+        elif check == 2:
+            idNumber[i] = idNumber[i] % 400000
+        elif check == 3:
+            WashU[i] = "|  WASHINGTON UNIVERSITY                  |"
+        elif check == 4:
+            rand = random.randint(0,1)
+            if rand == 0:
+                year = random.randint(2000, 2017)
+                month = random.randint(1,12)
+                day = random.randint(1,28)
+
+                if month < 10:
+                    month = "0" + str(month)
+                if day < 10:
+                    day = "0" + str(day)
+
+                newDate = "{}-{}-{}".format(year, month, day)
+                dateCreated[i] = newDate
+
+            else:
+                year = random.randint(2023, 8000)
+                month = random.randint(1, 12)
+                day = random.randint(1, 28)
+
+                if month < 10:
+                    month = "0" + str(month)
+                if day < 10:
+                    day = "0" + str(day)
+
+                newDate = "{}-{}-{}".format(year, month, day)
+                dateCreated[i] = newDate
+
+
+
+
+
+    """
+
+    for i in range (last_name_line_size):
+        last_name_line_blank = last_name_line_blank + " "
+
+
+   
+    last_name_line_end = " ---------   |"
+    last_name_line = line_start + random_last_name + last_name_line_blank + last_name_line_end
+    first_name_line_size = 26 - random_first_size
+    first_name_line_blank = ""
+
+    charCount = len(lennyFaces[count])          #number of characters in a lenny face
+
+    for i in range(first_name_line_size):
+        first_name_line_blank = first_name_line_blank + " "
+
+        first_name_line_end = "| " + lennyFaces[count] + " |  |"
+
+        first_name_line = line_start + random_first_name + first_name_line_blank + first_name_line_end
+
+    print(last_names_array)
+"""
+
+    card = """
+    
+    
+    
+    
+     ----------------------------------------- 
+    |  last name                  ---------   |
+    |  first name                |         |  |
+    |                            |         |  |
+    |  WashU ID                  |         |  |
+    |                            |         |  |
+    |  Date created              |         |  |
+    |                             ---------   |
+    |  WASHINGTON UNIVERSITY                  |
+    |                                         |
+     -----------------------------------------
+    """
+    first_line = " -----------------------------------------"
+    third_line = "|                            |         |  |"
+    fourth_line = "|  " + str(round(idNumber[count])) + "                    |   | |   |  |" 
+    fifth_line = "|  " + str(dateCreated[count]) + "                |/       \|  |"
+    sixth_line = "|                             ---------   |"
+    seventh_line = WashU[count]
+
+
+    eighth_line = "|                                         |"
+    ninth_line = " ----------------------------------------- "
+
+    #lines_array
+    print (first_line)
+    print (last_names_array[count])
+    print (first_name_line)
+    print (third_line)
+    print (fourth_line)
+    print ("|                            | --- --- |  |")
+    print(fifth_line)
+    print(sixth_line)
+    print(seventh_line)
+    print(eighth_line)
+    print(ninth_line)
+
+    count+=1
+
+    if count>13:
+        isRunning = False
+    else:
+        isRunning = True
+
+
+
+
+isRunning = False
+
+while isRunning:
+    print("Valid?")
+    yes = input("YES or NO" + "\n")
+    print()
+
+    if yes == "YES" or yes == "yes":
+        isValid = True
+    elif yes == "NO" or yes == "no":
+        isValid = False
+    else:
+        print(" it's yes or no only")
+
+    if isValid:
+        print('this is real')
+    else:
+        print('boi get that outta here')
+
